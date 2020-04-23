@@ -6,7 +6,6 @@ import RPi.GPIO as GPIO
 import time
 import pyotp
 import atexit
-atexit.register(cleanup)
 
 trigger = 7
 
@@ -36,6 +35,7 @@ def cleanup():
     GPIO.cleanup()
 
 if(__name__ == '__main__'):
+    atexit.register(cleanup)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(trigger, GPIO.OUT)
     print('secret is: ' + str(secret))
