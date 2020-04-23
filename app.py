@@ -24,9 +24,9 @@ def sms():
     return str(resp)
 
 def open_door():
-    GPIO.output(3, GPIO.HIGH)
+    GPIO.output(10, GPIO.HIGH)
     time.sleep(10)
-    GPIO.output(3, GPIO.LOW)
+    GPIO.output(10, GPIO.LOW)
 
 def cleanup():
     GPIO.cleanup()
@@ -34,7 +34,7 @@ def cleanup():
 if(__name__ == '__main__'):
     atexit.register(cleanup)
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(3, GPIO.OUT)
-    GPIO.output(3, GPIO.LOW)
+    GPIO.setup(10, GPIO.OUT)
+    GPIO.output(10, GPIO.LOW)
     print('provision with: ' + str(totp.provisioning_uri()))
     app.run()
