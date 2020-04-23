@@ -36,5 +36,5 @@ if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(10, GPIO.OUT)
     GPIO.output(10, GPIO.LOW)
-    print('provision with: ' + str(totp.provisioning_uri()))
+    print('provision with: ' + str(totp.provisioning_uri("test")))
     app.run()
