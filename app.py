@@ -7,8 +7,6 @@ import time
 import pyotp
 import atexit
 
-trigger = 7
-
 app = Flask(__name__)
 secret = pyotp.random_base32()
 totp = pyotp.TOTP(secret)
@@ -19,17 +17,18 @@ def sms():
     code  = request.form['Body']
     print(str(totp.now()))
     resp = MessagingResponse()
+    open_door()
     if(totp.verify(code)):
-        open_door()
+        #open_door()
         resp.message('Garage door is opening, please stand by...')
     else:
         resp.message('Invalid code...')
     return str(resp)
 
 def open_door():
-    GPIO.output(trigger, GPIO.HIGH)
-    time.sleep(0.1)
-    GPIO.output(trigger, GPIO.LOW)
+    GPIO.output(15, GPIO.HIGH)
+    time.sleep(10)
+    GPIO.output(15, GPIO.LOW)
 
 def cleanup():
     GPIO.cleanup()
