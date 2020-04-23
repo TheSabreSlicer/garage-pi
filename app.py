@@ -8,8 +8,7 @@ import pyotp
 import atexit
 
 app = Flask(__name__)
-secret = pyotp.random_base32()
-totp = pyotp.TOTP(secret)
+totp = pyotp.TOTP(pyotp.random_base32())
 
 @app.route('/sms', methods=['POST'])
 def sms():
@@ -17,9 +16,8 @@ def sms():
     code  = request.form['Body']
     print(str(totp.now()))
     resp = MessagingResponse()
-    open_door()
     if(totp.verify(code)):
-        #open_door()
+        open_door()
         resp.message('Garage door is opening, please stand by...')
     else:
         resp.message('Invalid code...')
@@ -38,5 +36,5 @@ if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(3, GPIO.OUT)
     GPIO.output(3, GPIO.LOW)
-    print('secret is: ' + str(secret))
+    print('provision with: ' + str(totp.provisioning_uri()))
     app.run()
