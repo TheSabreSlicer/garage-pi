@@ -26,9 +26,9 @@ def sms():
     return str(resp)
 
 def open_door():
-    GPIO.output(1, GPIO.HIGH)
+    GPIO.output(2, GPIO.HIGH)
     time.sleep(10)
-    GPIO.output(1, GPIO.LOW)
+    GPIO.output(2, GPIO.LOW)
 
 def cleanup():
     GPIO.cleanup()
@@ -36,7 +36,7 @@ def cleanup():
 if(__name__ == '__main__'):
     atexit.register(cleanup)
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(1, GPIO.OUT)
-    GPIO.output(1, GPIO.LOW)
+    GPIO.setup(2, GPIO.OUT)
+    GPIO.output(2, GPIO.LOW)
     print('secret is: ' + str(secret))
     app.run()
