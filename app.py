@@ -29,7 +29,8 @@ def open_door():
     time.sleep(0.1)
     GPIO.output(trigger, GPIO.LOW)
 
-if(__name__ == "__main__"):
+if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(trigger, GPIO.OUT)
+    print('secret is: ' + str(secret))
     app.run()
