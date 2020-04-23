@@ -15,8 +15,13 @@ totp = pyotp.TOTP(secret)
 def sms():
     number = request.form['From']
     code  = request.form['Body']
+    resp = twiml.Response()
     if(totp.verify(code)):
         open_door()
+        resp.message('Garage door is opening, please stand by...')
+    else:
+        resp.message('Invalid code...')
+    return str(resp)
 
 def open_door():
     GPIO.output(trigger, GPIO.HIGH)
