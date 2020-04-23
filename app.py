@@ -18,6 +18,7 @@ totp = pyotp.TOTP(secret)
 def sms():
     number = request.form['From']
     code  = request.form['Body']
+    print(str(totp.now()))
     resp = MessagingResponse()
     if(totp.verify(code)):
         open_door()
