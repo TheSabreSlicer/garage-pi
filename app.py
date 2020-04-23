@@ -4,7 +4,7 @@ from flask import Flask, request
 from twilio import twiml
 import RPi.GPIO as GPIO
 import time
-import pyopt
+import pyotp
 
 trigger = 7
 
