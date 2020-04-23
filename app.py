@@ -36,6 +36,6 @@ def cleanup():
 if(__name__ == '__main__'):
     atexit.register(cleanup)
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(trigger, GPIO.OUT)
+    GPIO.setup(15, GPIO.OUT)
     print('secret is: ' + str(secret))
     app.run()
