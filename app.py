@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask, request
-from twilio import twiml
+from twilio.twiml.messaging_response import MessagingResponse
 import RPi.GPIO as GPIO
 import time
 import pyotp
@@ -16,7 +16,7 @@ totp = pyotp.TOTP(secret)
 def sms():
     number = request.form['From']
     code  = request.form['Body']
-    resp = twiml.Response()
+    resp = MessagingResponse()
     if(totp.verify(code)):
         open_door()
         resp.message('Garage door is opening, please stand by...')
