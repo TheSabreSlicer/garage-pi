@@ -5,6 +5,8 @@ from twilio.twiml.messaging_response import MessagingResponse
 import RPi.GPIO as GPIO
 import time
 import pyotp
+import atexit
+atexit.register(cleanup)
 
 trigger = 7
 
@@ -28,6 +30,9 @@ def open_door():
     GPIO.output(trigger, GPIO.HIGH)
     time.sleep(0.1)
     GPIO.output(trigger, GPIO.LOW)
+
+def cleanup():
+    GPIO.cleanup()
 
 if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
