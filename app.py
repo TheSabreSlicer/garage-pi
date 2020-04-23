@@ -14,7 +14,6 @@ totp = pyotp.TOTP(pyotp.random_base32())
 def sms():
     number = request.form['From']
     code  = request.form['Body']
-    print(str(totp.now()))
     resp = MessagingResponse()
     if(totp.verify(code)):
         open_door()
@@ -25,7 +24,7 @@ def sms():
 
 def open_door():
     GPIO.output(10, GPIO.HIGH)
-    time.sleep(10)
+    time.sleep(1)
     GPIO.output(10, GPIO.LOW)
 
 def cleanup():
@@ -36,5 +35,5 @@ if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(10, GPIO.OUT)
     GPIO.output(10, GPIO.LOW)
-    print('provision with: ' + str(totp.provisioning_uri("test")))
+    print('provision with: ' + str(totp.provisioning_uri("")))
     app.run()
