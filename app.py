@@ -16,7 +16,7 @@ def sms():
     number = request.form['From']
     msg  = request.form['Body']
     resp = MessagingResponse()
-    if(msg == "SETUP" and setup_mode):
+    if(msg == "SETUP" and setup_mode == True):
         resp.message(totp.provisioning_uri(""))
     elif(msg == "STOP_SETUP"):
         setup_mode = False
@@ -41,4 +41,5 @@ if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(10, GPIO.OUT)
     GPIO.output(10, GPIO.LOW)
+    setup_mode = True
     app.run()
