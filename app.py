@@ -13,6 +13,7 @@ setup_mode = True
 
 @app.route('/sms', methods=['POST'])
 def sms():
+    global setup_mode
     number = request.form['From']
     msg  = request.form['Body']
     resp = MessagingResponse()
@@ -41,5 +42,4 @@ if(__name__ == '__main__'):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(10, GPIO.OUT)
     GPIO.output(10, GPIO.LOW)
-    setup_mode = True
     app.run()
