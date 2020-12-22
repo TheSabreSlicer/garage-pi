@@ -16,12 +16,12 @@ def sms():
     number = request.form['From']
     msg  = request.form['Body']
     resp = MessagingResponse()
-    if(msg === "setup" and setup_mode):
+    if(msg == "setup" and setup_mode):
         resp.message(totp.provisioning_uri(""))
-    else if(msg === "STOP SETUP"):
+    elif(msg == "STOP SETUP"):
         setup_mode = False
         resp.message('Setup is now stopped.')
-    else if(totp.verify(code)):
+    elif(totp.verify(msg)):
         open_door()
         resp.message('Garage activated, please stand by...')
     else:
