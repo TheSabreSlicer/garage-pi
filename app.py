@@ -16,9 +16,9 @@ def sms():
     number = request.form['From']
     msg  = request.form['Body']
     resp = MessagingResponse()
-    if(msg == "setup" and setup_mode):
+    if(msg == "SETUP" and setup_mode):
         resp.message(totp.provisioning_uri(""))
-    elif(msg == "STOP SETUP"):
+    elif(msg == "STOP_SETUP"):
         setup_mode = False
         resp.message('Setup is now stopped.')
     elif(totp.verify(msg)):
